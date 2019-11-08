@@ -20,11 +20,16 @@ func (b *bnywf) Start(addr string) {
 }
 
 func (b *bnywf) GET(pattern string, h HandlerFunc) {
-	http.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
+
+	params:=isRealPath(pattern)
+
+	http.HandleFunc(params[0], func(w http.ResponseWriter, r *http.Request) {
 		c:=&context{
 			ResponseWriter:w,
 			Request:r,
 		}
 		h(c)
 	})
+
+
 }
