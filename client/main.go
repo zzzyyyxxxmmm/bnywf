@@ -2,14 +2,15 @@ package main
 
 import (
 	"bnywf"
+	"net/http"
 )
 
 func sayhello(c bnywf.Context) {
-	c.String("hello world")
+	c.String(http.StatusOK, "hello world")
 }
 
 func sayok(c bnywf.Context) {
-	c.String("ok")
+	c.String(http.StatusAccepted, "ok")
 }
 
 func main() {

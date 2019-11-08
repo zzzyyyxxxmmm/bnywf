@@ -1,6 +1,9 @@
 package bnywf
 
-import "net/http"
+import (
+	"net/http"
+	"strconv"
+)
 
 type context struct {
 	ResponseWriter http.ResponseWriter
@@ -8,9 +11,11 @@ type context struct {
 }
 
 type Context interface {
-	String(s string)
+	String(code int ,s string)
 }
 
-func (c *context) String(s string){
+func (c *context) String(code int , s string){
+	codestring:=strconv.Itoa(code)
+	c.ResponseWriter.Header().Set("Status Code",codestring)
 	c.ResponseWriter.Write([]byte(s))
 }
